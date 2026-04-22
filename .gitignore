@@ -131,5 +131,8 @@ dmypy.json
 #VSCode
 settings.json
 
-## Ephemeral AI Workspace
+## Ephemeral AI workspace
 .ai/
+
+## Temporary files and scripts
+.tmp/
