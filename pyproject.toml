@@ -37,11 +37,18 @@ dev = [
     "requests", # for integration tests
     "mypy; python_version >= '3.8'",
     "black; python_version >= '3.8'",
+    "ruff; python_version >= '3.8'",
     "pre-commit; python_version >= '3.8'",
     "mkdocs; python_version >= '3.8'",
     "mkdocs-material; python_version >= '3.8'",
     "mkdocstrings[python]; python_version >= '3.8'",
 ]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "S"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -75,4 +82,3 @@ warn_return_any = true
 warn_unreachable = true
 warn_unused_configs = true
 no_implicit_reexport = false
-
