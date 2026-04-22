@@ -9,7 +9,7 @@ authors= ["Stepan Snigirev <snigirev.stepan@gmail.com>"]
 repository = "https://github.com/diybitcoinhardware/embit"
 
 [tool.poetry.dependencies]
-python = "^3.0"
+python = ">=3.5"
 
 [build-system]
 requires = ["setuptools>=42.0", "wheel"]
@@ -20,6 +20,7 @@ name = "embit"
 version = "0.8.0"
 description="A minimal bitcoin library for MicroPython and Python3 with a focus on embedded systems."
 readme = "README.md"
+requires-python = ">=3.5"
 authors = [
     {name = "Stepan Snigirev", email = "snigirev.stepan@gmail.com"},
 ]
@@ -34,12 +35,12 @@ dev = [
     "pytest",
     "pytest-cov",
     "requests", # for integration tests
-    "mypy",
-    "black",
-    "pre-commit",
-    "mkdocs",
-    "mkdocs-material",
-    "mkdocstrings[python]",
+    "mypy; python_version >= '3.8'",
+    "black; python_version >= '3.8'",
+    "pre-commit; python_version >= '3.8'",
+    "mkdocs; python_version >= '3.8'",
+    "mkdocs-material; python_version >= '3.8'",
+    "mkdocstrings[python]; python_version >= '3.8'",
 ]
 
 [tool.setuptools.packages.find]
