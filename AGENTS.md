@@ -25,6 +25,7 @@
 - Treat Ruff security findings (`S`) as high priority:
   - fix them, or
   - justify inline with minimal scope
+- Run package inspect helper: `python tools/package-inspect.py` to validate package contents
 
 ## Ephemeral Workspace
 - Use `.ai/` for temporary work:
