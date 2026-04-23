@@ -47,8 +47,26 @@ select = ["E", "F", "B", "S"]
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-data]
-embit = ["util/prebuilt/*"]
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.exclude-package-data]
+"*" = [
+    "*.so",
+    "*.dll",
+    "*.dylib",
+    "*.pth",
+    "sitecustomize.py",
+    "usercustomize.py",
+    "*.egg",
+    "*.whl",
+    "*.tar.gz",
+    "*.egg-info/*",
+    "*.dist-info/*",
+]
+embit = [
+    "util/prebuilt/*",
+]
 
 
 [tool.pytest.ini_options]
