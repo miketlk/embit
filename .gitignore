@@ -136,3 +136,8 @@ settings.json
 
 ## Temporary files and scripts
 .tmp/
+
+## Hardening: never commit local native secp256k1 artifacts
+src/embit/util/prebuilt/*.so
+src/embit/util/prebuilt/*.dylib
+src/embit/util/prebuilt/*.dll
