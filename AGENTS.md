@@ -38,6 +38,7 @@
 - Keep runtime dependencies minimal; avoid adding new runtime deps unless clearly justified.
 - Treat packaging/release-sensitive files as high-risk: `pyproject.toml`, `setup.py`, `.gitmodules`, `src/embit/util/ctypes_secp256k1.py`, `src/embit/util/prebuilt/*`, and `secp256k1/**`.
 - Do not introduce install-time hooks or hidden execution paths (`.pth`, `sitecustomize.py`, `usercustomize.py`, custom setup commands).
+- Never write code comments about implementation process, fulfilling user prompts, or plan steps/phases; comments must describe code behavior or rationale only.
 
 ## Docs/config sync
 - If behavior changes, update relevant docs in `README.md` and/or `docs/api/*` in the same change.
