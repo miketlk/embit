@@ -2,7 +2,8 @@
 
 `embit` is a bitcoin library designed to run either with Python 3 on a PC or with [MicroPython](https://micropython.org/) on embedded devices.
 
-For cryptography it uses [libsecp256k1](https://github.com/bitcoin-core/secp256k1) library maintained by [Bitcoin Core](https://bitcoincore.org/) team for elliptic, and everything else is implemented in python.
+For cryptography, `embit` uses [libsecp256k1](https://github.com/bitcoin-core/secp256k1) through optional ctypes bindings when available, otherwise it uses the pure-Python fallback implementation.
+On Python 3, ctypes lookup order is local `secp256k1/secp256k1-zkp/.libs`, then system `libsecp256k1`, then system `secp256k1`, then `src/embit/util/prebuilt` (compatibility-only; no shipped binaries).
 
 ## Supported features:
 

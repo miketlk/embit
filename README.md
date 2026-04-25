@@ -24,9 +24,17 @@ To install run `pip3 install embit`.
 
 To install in development mode (editable) clone and run `pip3 install -e .` from the root folder.
 
-PyPi installation includes prebuilt libraries for common platforms (win, macos, linux, raspi) - see [`src/embit/util/prebuilt/`](./src/embit/util/prebuilt/) folder. Library is built from [libsecp-zkp](https://github.com/ElementsProject/secp256k1-zkp) fork for Liquid support, but will work with pure [libsecp256k1](https://github.com/bitcoin-core/secp256k1) as well - just Liquid functionality doesn't work. If it fails to use the prebuilt or system library it will fallback to pure python implementation.
+PyPI artifacts are pure Python and do not bundle prebuilt `libsecp256k1` binaries.
+If a compatible system `libsecp256k1` is installed, `embit` can use the ctypes backend.
+If no compatible system library is available, `embit` automatically falls back to the pure Python implementation.
+ctypes library discovery order is:
 
-If you want to build the lib yourself, see: [Building secp256k1 for `embit`](/secp256k1/README.md).
+1. `secp256k1/secp256k1-zkp/.libs` (repo-local build outputs)
+2. system loader (`libsecp256k1`)
+3. system loader (`secp256k1`)
+4. `src/embit/util/prebuilt/*` (compatibility-only path; no binaries are shipped in package artifacts)
+
+To build and install `libsecp256k1` locally, see: [Building secp256k1 for `embit`](/secp256k1/README.md).
 
 
 ## Using non-English BIP39 wordlists
