@@ -13,7 +13,6 @@ on:
       - "constraints-dev.txt"
       - "src/embit/util/ctypes_secp256k1.py"
       - "docs/package-content-policy.md"
-      - "tools/package-inspect.py"
       - "tools/verify_package_artifacts.py"
       - "secp256k1/**"
   pull_request:
@@ -26,7 +25,6 @@ on:
       - "constraints-dev.txt"
       - "src/embit/util/ctypes_secp256k1.py"
       - "docs/package-content-policy.md"
-      - "tools/package-inspect.py"
       - "tools/verify_package_artifacts.py"
       - "secp256k1/**"
 
