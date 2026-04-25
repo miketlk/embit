@@ -1,23 +1,25 @@
 [build-system]
 requires = [
-    "setuptools==50.3.2; python_version < '3.7'",
-    "setuptools==65.5.0; python_version >= '3.7'",
-    "wheel==0.37.1; python_version < '3.8'",
-    "wheel==0.45.1; python_version >= '3.8'",
+    "setuptools==65.5.0",
+    "wheel==0.45.1",
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "embit"
 version = "0.8.0"
-description="A minimal bitcoin library for MicroPython and Python3 with a focus on embedded systems."
+description = "A minimal bitcoin library for MicroPython and CPython 3.10+ with a focus on embedded systems."
 readme = "README.md"
-requires-python = ">=3.5"
+requires-python = ">=3.10"
 authors = [
     {name = "Stepan Snigirev", email = "snigirev.stepan@gmail.com"},
 ]
 classifiers = [
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
 ]
@@ -34,13 +36,13 @@ dev = [
     "pytest",
     "pytest-cov",
     "requests", # for integration tests
-    "mypy; python_version >= '3.8'",
-    "black; python_version >= '3.8'",
-    "ruff; python_version >= '3.8'",
-    "pre-commit; python_version >= '3.8'",
-    "mkdocs; python_version >= '3.8'",
-    "mkdocs-material; python_version >= '3.8'",
-    "mkdocstrings[python]; python_version >= '3.8'",
+    "mypy",
+    "black",
+    "ruff",
+    "pre-commit",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
 ]
 
 [tool.ruff]

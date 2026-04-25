@@ -1,6 +1,6 @@
 # embit
 
-A minimal bitcoin library for MicroPython and Python3 with a focus on embedded systems.
+A minimal bitcoin library for MicroPython and Python 3.10+ with a focus on embedded systems.
 
 Should remain minimal to fit in a microcontroller. Also easy to audit.
 
@@ -16,7 +16,7 @@ Support the project: `bc1qd4flfrxjctls9ya244u39hd67pcprhvka723gv`
 
 Requires a custom MicroPython build with extended [`hashlib`](https://github.com/diybitcoinhardware/f469-disco/tree/master/usermods/uhashlib) module and [`secp256k1`](https://github.com/diybitcoinhardware/secp256k1-embedded) bindings.
 
-To install copy the content of `embit` folder to the board. To save some space you can remove files `embit/util/ctypes_secp256k1.py` and `embit/util/pyhashlib.py` - they are used only in Python3.
+To install copy the content of `embit` folder to the board. To save some space you can remove files `embit/util/ctypes_secp256k1.py` and `embit/util/pyhashlib.py` - they are used only in CPython.
 
 ## Python 3
 

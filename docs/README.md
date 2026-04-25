@@ -1,9 +1,9 @@
 # Overview
 
-`embit` is a bitcoin library designed to run either with Python 3 on a PC or with [MicroPython](https://micropython.org/) on embedded devices.
+`embit` is a bitcoin library designed to run either with CPython 3.10+ on a PC or with [MicroPython](https://micropython.org/) on embedded devices.
 
 For cryptography, `embit` uses [libsecp256k1](https://github.com/bitcoin-core/secp256k1) through optional ctypes bindings when available, otherwise it uses the pure-Python fallback implementation.
-On Python 3, ctypes lookup order is local `secp256k1/secp256k1-zkp/.libs`, then system `libsecp256k1`, then system `secp256k1`, then `src/embit/util/prebuilt` (compatibility-only; no shipped binaries).
+On CPython, ctypes lookup order is local `secp256k1/secp256k1-zkp/.libs`, then system `libsecp256k1`, then system `secp256k1`, then `src/embit/util/prebuilt` (compatibility-only; no shipped binaries).
 
 ## Supported features:
 
@@ -17,7 +17,7 @@ On Python 3, ctypes lookup order is local `secp256k1/secp256k1-zkp/.libs`, then 
 
 ## Installation
 
-**Python 3:**
+**CPython 3.10+:**
 ```sh
 pip3 install embit
 ```
@@ -30,7 +30,7 @@ pip3 install embit
 
 This script generates bip39 recovery phrase, converts it to the root key, derives native segwit xpub, prints first 5 receiving addresses, parses PSBT transaction and signs it.
 
-We use `hexlify` and `%s` formatting to keep it compatible with MicroPython, if you use Python3 you can use `.hex()` and f-strings.
+We use `hexlify` and `%s` formatting to keep it compatible with MicroPython; on CPython you can use `.hex()` and f-strings.
 
 For more details check out the [API docs](./api/README.md)
 
