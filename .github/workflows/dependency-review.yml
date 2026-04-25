@@ -11,6 +11,42 @@ jobs:
   dependency-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/dependency-review-action@v4
+      - uses: actions/checkout@v4
+
+      - id: review
+        uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: low
+          fail-on-scopes: runtime, development, unknown
+          license-check: true
+          vulnerability-check: true
+
+      - name: Require review for new dependencies
+        env:
+          DEPENDENCY_CHANGES: ${{ steps.review.outputs.dependency-changes }}
+          REVIEWED_DEPENDENCY_PURLS: ""
+        run: |
+          set -euo pipefail
+
+          changes=${DEPENDENCY_CHANGES:-[]}
+          pending=$(
+            jq -r --arg reviewed "$REVIEWED_DEPENDENCY_PURLS" '
+              ($reviewed | split(",") | map(gsub("^\\s+|\\s+$"; "")) | map(select(length > 0))) as $allowlist
+              | [
+                  .[]
+                  | select(.change_type == "added")
+                  | select((.package_url | split("@")[0]) as $purl | ($allowlist | index($purl) | not))
+                  | "\(.manifest): \(.package_url)"
+                ]
+              | .[]
+            ' <<< "$changes"
+          )
+
+          if [ -n "$pending" ]; then
+            {
+              echo "New dependencies require maintainer review."
+              echo "Add reviewed package URLs without versions to REVIEWED_DEPENDENCY_PURLS."
+              echo "$pending"
+            } >&2
+            exit 1
+          fi
