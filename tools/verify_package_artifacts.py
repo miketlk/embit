@@ -77,6 +77,7 @@ def expected_metadata_from_pyproject(pyproject: dict) -> dict:
         "name": project["name"],
         "version": project["version"],
         "requires_python": project["requires-python"],
+        "classifiers": set(project.get("classifiers", [])),
         "project_urls": {
             f"{key}, {value}" for key, value in project.get("urls", {}).items()
         },
@@ -219,6 +220,12 @@ def verify_metadata(
         raise SystemExit(
             f"{label} requires-python mismatch: {metadata.get('Requires-Python')!r}"
         )
+    classifiers = set(metadata.get_all("Classifier", []))
+    if classifiers != expected["classifiers"]:
+        raise SystemExit(
+            f"{label} classifiers mismatch: "
+            f"{sorted(classifiers)!r} != {sorted(expected['classifiers'])!r}"
+        )
 
     project_urls = set(metadata.get_all("Project-URL", []))
     if project_urls != expected["project_urls"]:
@@ -291,6 +298,7 @@ def render_inspection_report(*, wheel: Path, sdist: Path) -> str:
                     "Name:",
                     "Version:",
                     "Requires-Python:",
+                    "Classifier:",
                     "Project-URL:",
                     "Requires-Dist:",
                     "Provides-Extra:",
