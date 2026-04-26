@@ -14,6 +14,7 @@ This project publishes from GitHub Actions only. Do not run `twine upload` from 
 - Confirm the tag resolves to the intended commit already merged on the protected default branch.
 - Confirm CI passed tests, package-content checks, and artifact inspection for that exact commit.
 - Compare artifact filenames and SHA256 values against CI-generated checksums.
+- Confirm the build job generated `release-metadata/embit-sbom.cdx.json`.
 - Confirm the publish-only job downloads previously built artifacts and cannot rebuild.
 - Confirm release notes match the tagged changes and version.
 
@@ -24,6 +25,7 @@ This project publishes from GitHub Actions only. Do not run `twine upload` from 
 - Confirm PyPI and GitHub Release artifacts correspond to the intended tag and commit.
 - Confirm published artifact set matches workflow output exactly with no unexpected files.
 - Confirm artifact attestations were generated and attached for the release artifacts.
+- Confirm the SBOM in the release bundle names the released version and built artifacts.
 - Verify PyPI metadata (`Name`, `Version`, `Requires-Python`, dependencies/extras, project URLs) matches repository metadata.
 - Confirm the release workflow did not restore reusable caches from other workflows.
 - When practical, perform approval and verification from a fresh browser session or separate device from day-to-day development.

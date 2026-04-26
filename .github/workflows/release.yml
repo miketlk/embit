@@ -68,6 +68,9 @@ jobs:
       - name: Verify artifacts
         run: python tools/verify_package_artifacts.py --inspection-log .ai/runs/release-package-inspection.md
 
+      - name: Generate release SBOM
+        run: python tools/generate_release_sbom.py --output release-metadata/embit-sbom.cdx.json
+
       - name: Generate release checksums
         working-directory: dist
         run: |
@@ -82,6 +85,7 @@ jobs:
             dist/*.tar.gz
             dist/*.whl
             release-metadata/SHA256SUMS
+            release-metadata/embit-sbom.cdx.json
             .ai/runs/release-package-inspection.md
 
   publish:
