@@ -73,14 +73,18 @@ jobs:
 
       - name: Generate release checksums
         working-directory: dist
-        run: sha256sum * > SHA256SUMS
+        run: |
+          mkdir -p ../release-metadata
+          sha256sum *.tar.gz *.whl > ../release-metadata/SHA256SUMS
 
       - name: Upload release bundle
         uses: actions/upload-artifact@v4
         with:
           name: release-bundle-${{ steps.resolve-tag.outputs.release_tag }}
           path: |
-            dist/*
+            dist/*.tar.gz
+            dist/*.whl
+            release-metadata/SHA256SUMS
             .ai/runs/release-package-inspection.md
 
   publish:
@@ -103,12 +107,17 @@ jobs:
 
       - name: Verify artifact hashes
         working-directory: release-bundle/dist
-        run: sha256sum --check SHA256SUMS
+        run: sha256sum --check ../release-metadata/SHA256SUMS
 
-      - name: Generate build attestations
+      - name: Generate sdist build attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: release-bundle/dist/*
+          subject-path: release-bundle/dist/*.tar.gz
+
+      - name: Generate wheel build attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: release-bundle/dist/*.whl
 
       - name: Publish release artifacts
         uses: pypa/gh-action-pypi-publish@release/v1
