@@ -45,7 +45,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--inspection-log",
         default=None,
-        help="Optional path to store a package-inspect style report.",
+        help="Optional path to store a package inspect style report.",
     )
     return parser.parse_args()
 

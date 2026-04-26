@@ -105,7 +105,7 @@ micropython ./run_tests.py
 Inspect built package contents (latest wheel and sdist from `dist/`):
 
 ```sh
-python tools/package-inspect.py
+python tools/package_inspect.py
 ```
 
 This helper prints selected package metadata (`Name`, `Version`, `Requires-Python`,
