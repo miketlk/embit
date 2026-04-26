@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import email
-import re
 import tarfile
 import zipfile
 from dataclasses import dataclass
@@ -10,6 +9,10 @@ from pathlib import Path
 from typing import Iterable
 
 import tomllib
+
+from packaging.markers import Marker
+from packaging.requirements import InvalidRequirement, Requirement
+from packaging.utils import canonicalize_name
 
 
 FORBIDDEN_SUFFIXES = (
@@ -59,20 +62,55 @@ def read_pyproject() -> dict:
         return tomllib.load(f)
 
 
-def normalized_project_name(name: str) -> str:
-    return re.sub(r"[-_.]+", "-", name).lower()
+def parse_requirement(requirement: str) -> Requirement:
+    try:
+        return Requirement(requirement)
+    except InvalidRequirement as exc:
+        raise SystemExit(f"could not parse requirement {requirement!r}: {exc}") from exc
 
 
-def normalize_requirement_name(requirement: str) -> str:
-    match = re.match(r"^\s*([A-Za-z0-9][A-Za-z0-9._-]*)", requirement)
-    if not match:
-        raise SystemExit(f"could not parse requirement name from {requirement!r}")
-    return normalized_project_name(match.group(1))
+def normalized_requirement(requirement: str | Requirement) -> str:
+    parsed = (
+        parse_requirement(requirement)
+        if isinstance(requirement, str)
+        else requirement
+    )
+    normalized = canonicalize_name(parsed.name)
+    if parsed.extras:
+        extras = ",".join(sorted(canonicalize_name(extra) for extra in parsed.extras))
+        normalized += f"[{extras}]"
+    if parsed.url:
+        normalized += f" @ {parsed.url}"
+    normalized += str(parsed.specifier)
+    if parsed.marker is not None:
+        normalized += f"; {parsed.marker}"
+    return normalized
+
+
+def requirement_with_extra(requirement: str, extra: str) -> Requirement:
+    parsed = parse_requirement(requirement)
+    extra_marker = f'extra == "{extra}"'
+    if parsed.marker is None:
+        parsed.marker = Marker(extra_marker)
+    else:
+        parsed.marker = Marker(f"({parsed.marker}) and {extra_marker}")
+    return parsed
+
+
+def requirement_has_expected_extra_marker(requirement: str, extras: set[str]) -> bool:
+    marker = parse_requirement(requirement).marker
+    if marker is None:
+        return False
+    marker_text = str(marker)
+    return any(f'extra == "{extra}"' in marker_text for extra in extras)
 
 
 def expected_metadata_from_pyproject(pyproject: dict) -> dict:
     project = pyproject["project"]
-    optional_dependencies = project.get("optional-dependencies", {})
+    optional_dependencies = {
+        canonicalize_name(extra): requirements
+        for extra, requirements in project.get("optional-dependencies", {}).items()
+    }
     return {
         "name": project["name"],
         "version": project["version"],
@@ -82,9 +120,9 @@ def expected_metadata_from_pyproject(pyproject: dict) -> dict:
             f"{key}, {value}" for key, value in project.get("urls", {}).items()
         },
         "extras": set(optional_dependencies),
-        "optional_requirement_names": {
-            normalize_requirement_name(requirement)
-            for requirements in optional_dependencies.values()
+        "optional_requirements": {
+            normalized_requirement(requirement_with_extra(requirement, extra))
+            for extra, requirements in optional_dependencies.items()
             for requirement in requirements
         },
     }
@@ -247,26 +285,26 @@ def verify_metadata(
         )
 
     requirement_headers = metadata.get_all("Requires-Dist", [])
-    requirement_names = {normalize_requirement_name(req) for req in requirement_headers}
+    requirements = {normalized_requirement(req) for req in requirement_headers}
     if (
         require_dependency_metadata
-        and requirement_names != expected["optional_requirement_names"]
+        and requirements != expected["optional_requirements"]
     ):
         raise SystemExit(
-            f"{label} dependency names mismatch: {sorted(requirement_names)!r} != "
-            f"{sorted(expected['optional_requirement_names'])!r}"
+            f"{label} dependency metadata mismatch: {sorted(requirements)!r} != "
+            f"{sorted(expected['optional_requirements'])!r}"
         )
     if (
         not require_dependency_metadata
-        and requirement_names
-        and requirement_names != expected["optional_requirement_names"]
+        and requirements
+        and requirements != expected["optional_requirements"]
     ):
         raise SystemExit(
-            f"{label} dependency names mismatch: {sorted(requirement_names)!r} != "
-            f"{sorted(expected['optional_requirement_names'])!r}"
+            f"{label} dependency metadata mismatch: {sorted(requirements)!r} != "
+            f"{sorted(expected['optional_requirements'])!r}"
         )
     for requirement in requirement_headers:
-        if 'extra == "dev"' not in requirement and "extra == 'dev'" not in requirement:
+        if not requirement_has_expected_extra_marker(requirement, expected["extras"]):
             raise SystemExit(
                 f"{label} has unexpected non-extra dependency: {requirement}"
             )
