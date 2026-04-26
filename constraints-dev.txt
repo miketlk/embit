@@ -1,5 +1,5 @@
 # Pinned + hashed dev toolchain constraints (Python >= 3.10).
-# Generated from poetry.lock and intended for CI reproducibility.
+# Generated from poetry.lock plus reviewed CI build frontend pins.
 # Includes transitive dependencies for the selected dev toolchain.
 # Install with: pip install --require-hashes -r constraints-dev.txt
 
@@ -44,6 +44,10 @@ black==26.3.1 ; python_version >= "3.10" \
     --hash=sha256:92c0ec1f2cc149551a2b7b47efc32c866406b6891b0ee4625e95967c8f4acfb1 \
     --hash=sha256:2bd5aa94fc267d38bb21a70d7410a89f1a1d318841855f698746f8e7f51acd1b \
     --hash=sha256:2c50f5063a9641c7eed7795014ba37b0f5fa227f3d408b968936e24bc0566b07
+
+build==1.2.2.post1 ; python_version >= "3.10" \
+    --hash=sha256:1d61c0887fa860c01971625baae8bdd338e517b836a2f70dd1f7aa3a6b2fc5b5 \
+    --hash=sha256:b36993e92ca9375a219c99e606a122ff365a760a2d4bba0caa09bd5278b608b7
 
 certifi==2026.2.25 ; python_version >= "3.10" \
     --hash=sha256:027692e4402ad994f1c42e52a4997a9763c646b73e4096e4d5d6db8af1d6f0fa \
@@ -635,6 +639,10 @@ pymdown-extensions==10.21 ; python_version >= "3.10" \
     --hash=sha256:91b879f9f864d49794c2d9534372b10150e6141096c3908a455e45ca72ad9d3f \
     --hash=sha256:39f4a020f40773f6b2ff31d2cd2546c2c04d0a6498c31d9c688d2be07e1767d5
 
+pyproject-hooks==1.2.0 ; python_version >= "3.10" \
+    --hash=sha256:9e5c6bfa8dcc30091c74b0cf803c81fdd29d94f01992a7707bc97babb1141913 \
+    --hash=sha256:1e859bd5c40fae9448642dd871adf459e5e2084186e8d2c2a79a824c970da1f8
+
 pytest==9.0.2 ; python_version >= "3.10" \
     --hash=sha256:711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b \
     --hash=sha256:75186651a92bd89611d1d9fc20f0b4345fd827c41ccd5c299a868a05d70edf11
@@ -894,4 +902,3 @@ watchdog==6.0.0 ; python_version >= "3.10" \
     --hash=sha256:cbafb470cf848d93b5d013e2ecb245d4aa1c8fd0504e863ccefa32445359d680 \
     --hash=sha256:a1914259fa9e1454315171103c6a30961236f508b9b623eae470268bbcc6a22f \
     --hash=sha256:9ddf7c82fda3ae8e24decda1338ede66e1c99883db93711d8fb941eaa2d8c282
-
