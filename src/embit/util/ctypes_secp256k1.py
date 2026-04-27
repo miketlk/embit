@@ -1,3 +1,4 @@
+# codeql[py/import-and-import-from]: Uses qualified APIs plus C type aliases.
 import ctypes
 import os
 import ctypes.util
