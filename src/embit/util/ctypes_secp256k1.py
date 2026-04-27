@@ -1,23 +1,20 @@
-# codeql[py/import-and-import-from]: Uses qualified APIs plus C type aliases.
 import ctypes
 import os
 import ctypes.util
 import platform
 import threading
 
-from ctypes import (
-    cast,
-    byref,
-    c_char,
-    c_int,
-    c_uint,
-    c_char_p,
-    c_size_t,
-    c_void_p,
-    c_uint64,
-    CFUNCTYPE,
-    POINTER,
-)
+cast = ctypes.cast
+byref = ctypes.byref
+c_char = ctypes.c_char
+c_int = ctypes.c_int
+c_uint = ctypes.c_uint
+c_char_p = ctypes.c_char_p
+c_size_t = ctypes.c_size_t
+c_void_p = ctypes.c_void_p
+c_uint64 = ctypes.c_uint64
+CFUNCTYPE = ctypes.CFUNCTYPE
+POINTER = ctypes.POINTER
 
 _lock = threading.Lock()
 

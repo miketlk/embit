@@ -8,7 +8,6 @@ except:
         # try ctypes bindings
         from . import ctypes_secp256k1 as _ctypes_secp256k1
         from .ctypes_secp256k1 import *
-        # codeql[py/unused-global-variable]: Exported for backend introspection.
         _secp = _ctypes_secp256k1._secp
 
         # For optional modules (ECDH/Schnorr/recovery/ZKP), keep ctypes when symbols
@@ -18,7 +17,7 @@ except:
 
         def _has_ctypes_symbol(symbol_name):
             try:
-                getattr(_ctypes_secp256k1._secp, symbol_name)
+                getattr(_secp, symbol_name)
                 return True
             except AttributeError:
                 return False
