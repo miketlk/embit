@@ -90,8 +90,8 @@ jobs:
 
       - name: Smoke install from local artifacts
         run: |
-          python -m venv .venv-smoke
-          . .venv-smoke/bin/activate
+          python -m venv "$RUNNER_TEMP/venv-smoke"
+          . "$RUNNER_TEMP/venv-smoke/bin/activate"
           python -m pip install --no-index --find-links dist embit
           python -c "import embit; print(embit.__file__)"
 
