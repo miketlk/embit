@@ -806,8 +806,8 @@ ruff==0.15.11 ; python_version >= "3.10" \
     --hash=sha256:063fed18cc1bbe0ee7393957284a6fe8b588c6a406a285af3ee3f46da2391ee4 \
     --hash=sha256:f092b21708bf0e7437ce9ada249dfe688ff9a0954fc94abab05dcea7dcd29c33
 
-setuptools==65.5.0 ; python_version >= "3.10" \
-    --hash=sha256:f62ea9da9ed6289bfe868cd6845968a2c854d1427f8548d52cae02a42b4f0356
+setuptools==80.9.0 ; python_version >= "3.10" \
+    --hash=sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922
 
 six==1.17.0 ; python_version >= "3.10" \
     --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274 \

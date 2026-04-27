@@ -75,7 +75,7 @@ jobs:
         working-directory: dist
         run: |
           mkdir -p ../release-metadata
-          sha256sum *.tar.gz *.whl > ../release-metadata/SHA256SUMS
+          sha256sum -- *.tar.gz *.whl > ../release-metadata/SHA256SUMS
 
       - name: Upload release bundle
         uses: actions/upload-artifact@v4

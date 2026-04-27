@@ -4,11 +4,14 @@ import argparse
 import hashlib
 import json
 import zipfile
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from uuid import NAMESPACE_URL, uuid5
 
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:
+    import tomli as tomllib
 
 
 def parse_args() -> argparse.Namespace:
@@ -129,7 +132,7 @@ def build_sbom(*, wheel: Path, sdist: Path) -> dict:
         "serialNumber": serial_number,
         "version": 1,
         "metadata": {
-            "timestamp": datetime.now(UTC).replace(microsecond=0).isoformat(),
+            "timestamp": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
             "tools": {
                 "components": [
                     {
