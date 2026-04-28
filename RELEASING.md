@@ -15,6 +15,11 @@ This project publishes from GitHub Actions only. Do not run `twine upload` from 
 - Confirm CI passed tests, package-content checks, and artifact inspection for that exact commit.
 - Compare artifact filenames and SHA256 values against CI-generated checksums.
 - Confirm the build job generated `release-metadata/embit-sbom.cdx.json`.
+- Extract the release bundle into a clean temporary directory and confirm it contains only the expected release files:
+  `dist/*.tar.gz`, `dist/*.whl`, `release-metadata/SHA256SUMS`,
+  `release-metadata/embit-sbom.cdx.json`, and
+  `release-metadata/release-package-inspection.md`.
+- Run installed-artifact smoke imports from outside the repository checkout so repo-local paths cannot affect backend selection.
 - Confirm the publish-only job downloads previously built artifacts and cannot rebuild.
 - Confirm release notes match the tagged changes and version.
 
