@@ -1,11 +1,11 @@
 from unittest import TestCase
 from embit.util import secp256k1
-from binascii import hexlify, unhexlify
-from embit.liquid.pset import PSET
-from embit.liquid.transaction import LTransaction, LTransactionInput, LTransactionOutput
-from embit.liquid import slip77
+from binascii import unhexlify
+from embit.ext.liquid.pset import PSET
+from embit.ext.liquid.transaction import LTransaction
+from embit.ext.liquid import slip77
 from embit.script import Script
-from embit.liquid.descriptor import LDescriptor
+from embit.ext.liquid.descriptor import LDescriptor
 from embit.bip32 import HDKey
 from embit.ec import PrivateKey
 from embit.hashes import tagged_hash

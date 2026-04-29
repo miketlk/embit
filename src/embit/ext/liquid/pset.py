@@ -3,12 +3,10 @@ import sys
 if sys.implementation.name == "micropython":
     import secp256k1
 else:
-    from ..util import secp256k1
+    from ...util import secp256k1
 
-from .. import compact, hashes
-from ..psbt import *
-from collections import OrderedDict
-from io import BytesIO
+from ... import hashes
+from ...psbt import *
 from .transaction import (
     LTransaction,
     LTransactionOutput,
@@ -22,7 +20,8 @@ from .transaction import (
     unblind,
 )
 from . import slip77
-import hashlib, gc
+import hashlib
+import gc
 
 
 class LInputScope(InputScope):

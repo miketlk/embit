@@ -1,16 +1,14 @@
 import sys
-import io
-from .. import compact
-from ..script import Script, Witness
-from .. import hashes
-from ..transaction import *
-from ..base import EmbitBase
+from ... import compact
+from ...script import Script, Witness
+from ...transaction import *
+from ...base import EmbitBase
 import hashlib
 
 if sys.implementation.name == "micropython":
     import secp256k1
 else:
-    from ..util import secp256k1
+    from ...util import secp256k1
 
 
 class LSIGHASH(SIGHASH):
@@ -369,7 +367,7 @@ class LTransaction(Transaction):
         h.update(inp.sequence.to_bytes(4, "little"))
         if inp.has_issuance:
             inp.asset_issuance.hash_to(h)
-        if not (sh in [SIGHASH.NONE, SIGHASH.SINGLE]):
+        if sh not in [SIGHASH.NONE, SIGHASH.SINGLE]:
             h.update(hashlib.sha256(self.hash_outputs()).digest())
             if hash_rangeproofs:
                 h.update(hashlib.sha256(self.hash_rangeproofs()).digest())

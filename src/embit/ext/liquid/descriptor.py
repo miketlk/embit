@@ -1,13 +1,13 @@
-from .. import ec
-from ..descriptor.descriptor import Descriptor
-from ..descriptor.base import DescriptorBase
-from ..descriptor.errors import DescriptorError
-from ..descriptor.arguments import Key
+from ... import ec
+from ...descriptor.descriptor import Descriptor
+from ...descriptor.base import DescriptorBase
+from ...descriptor.errors import DescriptorError
+from ...descriptor.arguments import Key
 from .networks import NETWORKS
 from .addresses import address
 from . import slip77
-from ..hashes import tagged_hash, sha256
-from ..misc import secp256k1
+from ...hashes import tagged_hash, sha256
+from ...misc import secp256k1
 
 
 class LDescriptor(Descriptor):

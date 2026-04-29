@@ -1,6 +1,5 @@
 """BIP-32 for blinding keys. Non-standard yet!!!"""
-import sys
-from .. import bip32, ec
+from ... import bip32, ec
 from .networks import NETWORKS
 import hmac
 

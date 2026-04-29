@@ -1,4 +1,4 @@
-from .. import networks
+from ... import networks
 
 const = lambda x: x
 

@@ -1,8 +1,8 @@
 from unittest import TestCase
 from embit.ec import PrivateKey
-from embit.liquid.pset import PSET
+from embit.ext.liquid.pset import PSET
 from embit.hashes import tagged_hash
-from embit.liquid import slip77
+from embit.ext.liquid import slip77
 import threading
 
 mbkey = PrivateKey.from_string("L2U2zGBgimb2vNee3bTw2y936PDJZXq3p7nMXEWuPP5MmpE1nCfv")

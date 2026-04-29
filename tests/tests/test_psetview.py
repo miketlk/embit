@@ -1,9 +1,9 @@
 from unittest import TestCase
-from embit.liquid.psetview import PSETView, GlobalLTransactionView
-from embit.liquid.pset import PSET
-from embit.liquid.transaction import LTransaction
+from embit.ext.liquid.psetview import PSETView, GlobalLTransactionView
+from embit.ext.liquid.pset import PSET
+from embit.ext.liquid.transaction import LTransaction
 from embit import bip32, bip39
-from binascii import a2b_base64, b2a_base64
+from binascii import a2b_base64
 from io import BytesIO
 
 ROOT = bip32.HDKey.from_seed(

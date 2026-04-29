@@ -1,4 +1,4 @@
-from ..psbtview import *
+from ...psbtview import *
 from .pset import *
 import hashlib
 
@@ -232,7 +232,7 @@ class PSETView(PSBTView):
         h.update(inp.sequence.to_bytes(4, "little"))
         if inp.has_issuance:
             inp.asset_issuance.hash_to(h)
-        if not (sh in [SIGHASH.NONE, SIGHASH.SINGLE]):
+        if sh not in [SIGHASH.NONE, SIGHASH.SINGLE]:
             h.update(hashlib.sha256(self.hash_outputs()).digest())
             if hash_rangeproofs:
                 h.update(hashlib.sha256(self.hash_rangeproofs()).digest())

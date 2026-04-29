@@ -1,5 +1,5 @@
 import hmac
-from ..ec import PrivateKey
+from ...ec import PrivateKey
 
 DOMAIN = b"Symmetric key seed"
 LABEL = b"SLIP-0077"

@@ -1,17 +1,15 @@
-from unittest import TestCase, skip
+from unittest import TestCase
 from util.liquid import daemon
 import random
-import time
 import os
 
-from embit.liquid.descriptor import LDescriptor as Descriptor
+from embit.ext.liquid.descriptor import LDescriptor as Descriptor
 from embit.descriptor.checksum import add_checksum
 from embit.bip32 import HDKey
-from embit.liquid.networks import get_network
-from embit.liquid.pset import PSET as PSBT
-from embit.liquid.transaction import LSIGHASH
-from embit.liquid.finalizer import finalize_psbt
-from embit.liquid.addresses import addr_decode
+from embit.ext.liquid.networks import get_network
+from embit.ext.liquid.pset import PSET as PSBT
+from embit.ext.liquid.finalizer import finalize_psbt
+from embit.ext.liquid.addresses import addr_decode
 from embit.ec import PrivateKey
 
 wallet_prefix = "test" + random.randint(0, 0xFFFFFFFF).to_bytes(4, "big").hex()
@@ -138,7 +136,6 @@ class PSETTest(TestCase):
         self.assertTrue(res[0]["allowed"])
         if selfblind:
             # check we can reblind all outputs
-            import json
 
             raw = w.unblindrawtransaction(raw)["hex"]
             decoded = w.decoderawtransaction(raw)

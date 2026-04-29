@@ -1,6 +1,6 @@
-from .. import ec
-from ..script import Witness, Script
-from .transaction import TxOutWitness, Proof, LTransaction
+from ... import ec
+from ...script import Witness, Script
+from .transaction import LTransaction
 
 
 def parse_multisig(sc):
