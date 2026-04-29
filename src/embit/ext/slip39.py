@@ -1,7 +1,7 @@
 import hmac
 import hashlib
-from .bip39 import mnemonic_from_bytes, mnemonic_to_bytes
-from .misc import secure_randint
+from ..bip39 import mnemonic_from_bytes, mnemonic_to_bytes
+from ..misc import secure_randint
 from .wordlists.slip39 import SLIP39_WORDS
 
 

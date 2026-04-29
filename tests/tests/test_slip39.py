@@ -2,9 +2,8 @@
 # https://github.com/trezor/python-shamir-mnemonic/blob/master/test_shamir.py
 # https://github.com/trezor/python-shamir-mnemonic/blob/master/vectors.json
 
-from binascii import hexlify, unhexlify
-from embit.bip32 import HDKey
-from embit.slip39 import (
+from binascii import unhexlify
+from embit.ext.slip39 import (
     Share,
     ShareSet,
 )
