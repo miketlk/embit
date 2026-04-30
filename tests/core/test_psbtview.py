@@ -2,7 +2,7 @@ from unittest import TestCase
 from embit.psbtview import PSBTView
 from embit.psbt import PSBT, InputScope, CompressMode
 from embit import bip32, bip39
-from binascii import a2b_base64, b2a_base64
+from binascii import a2b_base64
 from io import BytesIO
 
 ROOT = bip32.HDKey.from_seed(

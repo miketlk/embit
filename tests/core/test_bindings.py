@@ -1,4 +1,4 @@
-from binascii import unhexlify, hexlify
+from binascii import hexlify
 from unittest import TestCase
 from embit.util import py_secp256k1
 from embit.util import ctypes_secp256k1

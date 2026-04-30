@@ -1,5 +1,5 @@
 from unittest import TestCase
-from embit.ec import PublicKey, PrivateKey
+from embit.ec import PrivateKey
 import hashlib
 
 

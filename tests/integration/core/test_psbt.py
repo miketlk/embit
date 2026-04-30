@@ -1,4 +1,4 @@
-from unittest import TestCase, skip
+from unittest import TestCase
 from util.bitcoin import daemon
 import random
 from embit.descriptor import Descriptor

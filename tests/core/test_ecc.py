@@ -1,4 +1,4 @@
-from binascii import unhexlify, hexlify
+from binascii import hexlify
 from unittest import TestCase
 from embit.ec import PublicKey, PrivateKey, Signature, secp256k1
 from io import BytesIO
