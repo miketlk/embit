@@ -45,7 +45,7 @@ Library is splitted into modules, list of modules sorted by topic:
 
 **Keys:**
 
-- [ec](./ec.md) - individual elliptic curve keys (`PrivateKey`, `PublicKey`) and signatures (`Signature`, `SchnorrSig`)
+- [ec](./ec/README.md) - individual elliptic curve keys (`PrivateKey`, `PublicKey`) and signatures (`Signature`, `SchnorrSig`)
 - [bip39](./bip39.md) - helper functions for mnemonics
 - [bip32](./bip32.md) - extended private and public keys (`HDKey`)
 

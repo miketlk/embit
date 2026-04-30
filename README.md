@@ -31,7 +31,7 @@ To install in development mode (editable) clone and run `pip3 install -e .` from
 
 PyPi installation includes prebuilt libraries for common platforms (win, macos, linux, raspi) - see [`src/embit/util/prebuilt/`](./src/embit/util/prebuilt/) folder. Library is built from [libsecp-zkp](https://github.com/ElementsProject/secp256k1-zkp) fork for Liquid support, but will work with pure [libsecp256k1](https://github.com/bitcoin-core/secp256k1) as well - just Liquid functionality doesn't work. If it fails to use the prebuilt or system library it will fallback to pure python implementation.
 
-If you want to build the lib yourself, see: [Building secp256k1 for `embit`](/secp256k1/README.md).
+If you want to build the lib yourself, see: [Building secp256k1 for `embit`](./secp256k1/README.md).
 
 
 ## Using non-English BIP39 wordlists
