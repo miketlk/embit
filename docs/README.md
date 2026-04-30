@@ -10,8 +10,8 @@ For cryptography it uses [libsecp256k1](https://github.com/bitcoin-core/secp256k
 - parsing and signing [PSBT](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) transactions - both version 1 and 2 ([API docs](./api/psbt.md))
 - signing with custom SIGHASH flags
 - Descriptors and miniscript support ([API docs](./api/descriptor.md))
-- SLIP-39 Shamir Secret Sharing scheme (experimental, [API docs](./api/slip39.md))
-- Liquid network support (experimental, [API docs](./api/liquid/README.md))
+- SLIP-39 Shamir Secret Sharing scheme (`embit.ext.slip39`, experimental, [API docs](./api/ext/slip39.md))
+- Liquid network support (`embit.ext.liquid`, experimental, [API docs](./api/ext/liquid/README.md))
 - Taproot support (in progress, experimental)
 
 ## Installation
@@ -22,6 +22,9 @@ pip3 install embit
 ```
 
 **Micropython:** requires custom build with C bindings to hashlib and secp256k1. Docs TBD, see examples for now: [stm32](https://github.com/diybitcoinhardware/f469-disco), [RiscV](https://github.com/stepansnigirev/MaixPy), [esp32](https://github.com/stepansnigirev/esp32_embit)
+
+The full Python package includes both core modules and optional extensions under
+`embit.ext`. Core-only MicroPython or vendored deployments can omit `embit/ext`.
 
 <!-- For more details check out [installation instructions](./install.md). -->
 
