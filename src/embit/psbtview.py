@@ -233,10 +233,20 @@ class PSBTView:
                 value = read_string(stream)
                 cur += len(value) + len(compact.to_bytes(len(value)))
                 if key == b"\xfb":
+                    if version is not None:
+                        raise PSBTError("Duplicated global version")
+                    if len(value) != 4:
+                        raise PSBTError("Global version must be 4 bytes")
                     version = int.from_bytes(value, "little")
+                    if version not in [0, 2]:
+                        raise PSBTError("Unsupported PSBT version %d" % version)
                 elif key == b"\x04":
+                    if num_inputs is not None:
+                        raise PSBTError("Invalid global input count")
                     num_inputs = compact.from_bytes(value)
                 elif key == b"\x05":
+                    if num_outputs is not None:
+                        raise PSBTError("Invalid global output count")
                     num_outputs = compact.from_bytes(value)
             elif key == b"\x00":
                 # we found global transaction
@@ -256,6 +266,10 @@ class PSBTView:
             else:
                 cur += skip_string(stream)
         first_scope = cur
+        # the check inside the loop only fires if 0xfb was seen before 0x00,
+        # so repeat it here to stay independent of the global map key order
+        if tx_offset is not None and version == 2:
+            raise PSBTError("Global transaction with version 2 PSBT")
         if None in [version or tx_offset, num_inputs, num_outputs]:
             raise PSBTError("Missing something important in PSBT")
         return cls(
